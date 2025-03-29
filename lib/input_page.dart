@@ -5,7 +5,14 @@ import 'icon_content.dart';
 import 'reusable_card.dart';
 
 const activeCardColor = Color(0xFF1D1E33);
+const inactiveCardColor = Color.fromARGB(255, 1, 16, 39);
 const bottomBarColor = Colors.red;
+
+enum Gender {
+  male,
+  female,
+  undefined
+}
 
 class InputPage extends StatefulWidget {
   @override
@@ -13,6 +20,9 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+
+  late Gender selectedGender = Gender.undefined; 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,15 +41,33 @@ class _InputPageState extends State<InputPage> {
             Expanded(
               child: Row(
                 children: [
-                  ReusableCard(
-                    colour: activeCardColor,
-                    cardChild: IconContent(
-                        icon: FontAwesomeIcons.mars, text: 'MALE'),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedGender = selectedGender == Gender.male ? Gender.undefined : Gender.male; 
+                        });
+                        },
+                      child: ReusableCard(
+                        colour: selectedGender == Gender.male ? activeCardColor : inactiveCardColor,
+                        cardChild: IconContent(
+                            icon: FontAwesomeIcons.mars, text: 'MALE'),
+                      ),
+                    ),
                   ),
-                  ReusableCard(
-                    colour: activeCardColor,
-                    cardChild: IconContent(
-                        icon: FontAwesomeIcons.venus, text: 'FEMALE'),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () { 
+                        setState(() {
+                          selectedGender = selectedGender == Gender.female ? Gender.undefined : Gender.female;
+                        });
+                        },
+                      child: ReusableCard(
+                        colour: selectedGender == Gender.female ? activeCardColor : inactiveCardColor,
+                        cardChild: IconContent(
+                            icon: FontAwesomeIcons.venus, text: 'FEMALE'),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -65,5 +93,27 @@ class _InputPageState extends State<InputPage> {
           ],
         ));
   }
+
+  // void updateColor(CardType cardType){
+  //   if (cardType == CardType.male) {
+  //     maleCardColor == inactiveCardColor ? maleCardColor = activeCardColor : maleCardColor = inactiveCardColor;
+  //     // if (maleCardColor == inactiveCardColor) {
+  //     // maleCardColor = activeCardColor;
+  //     // femaleCardColor = inactiveCardColor;
+  //     // } else {
+  //     //   maleCardColor = inactiveCardColor;
+  //     // }
+  //   }
+  //   if (cardType == CardType.female) {
+  //     if (femaleCardColor == inactiveCardColor) {
+  //     femaleCardColor = activeCardColor;
+  //     maleCardColor = inactiveCardColor;
+  //     } else {
+  //       femaleCardColor = inactiveCardColor;
+  //     }
+  //   } 
+
+  // }
+
 }
 
