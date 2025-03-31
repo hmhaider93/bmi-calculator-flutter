@@ -10,7 +10,7 @@ class ResultPage extends StatelessWidget {
     String resultText;
     if (bmi >= 25) {
       resultText = 'Overweight';
-    } else if (bmi > 18.5) {
+    } else if (bmi > 20) {
       resultText = 'Normal';
     } else {
       resultText = 'Underweight';
