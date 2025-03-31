@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'icon_content.dart';
 import 'reusable_card.dart';
+import 'result_page.dart';
 
 enum Gender { male, female, undefined }
 
@@ -24,14 +25,26 @@ class _InputPageState extends State<InputPage> {
         appBar: AppBar(
           title: Text('BMI CALCULATOR'),
         ),
-        bottomNavigationBar: BottomAppBar(
-          height: kBottomContainerHeight,
-          color: kBottomBarColor,
-          child: Center(
+        bottomNavigationBar: GestureDetector(
+          onTap: () {
+            double bmi = weight / ((height / 100) * (height / 100));
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ResultPage(bmi: bmi),
+              ),
+            );
+          },
+          child: BottomAppBar(
+            height: kBottomContainerHeight,
+            color: Colors.red,
+            child: Center(
               child: Text(
-            'CALCULATE',
-            style: kLableTextStyle,
-          )),
+                'CALCULATE',
+                style: kLableTextStyle.copyWith(color: Colors.white),
+              ),
+            ),
+          ),
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
