@@ -3,7 +3,16 @@ import 'package:bmi_calculator/Components/reusable_card.dart';
 import 'package:flutter/material.dart';
 
 class ResultsPage extends StatelessWidget {
-  const ResultsPage({super.key});
+
+  final String bmi;
+  final String result;
+  final String interpretation;
+
+  const ResultsPage({
+    required this.bmi,
+    required this.result,
+    required this.interpretation,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,21 +37,21 @@ class ResultsPage extends StatelessWidget {
                         height: 100.0,
                       ),
                       Text(
-                        'Normal',
+                        this.result,
                         style: kLableTextStyle,
                       ),
                       SizedBox(
                         height: 20.0,
                       ),
                       Text(
-                        '18.3',
+                        this.bmi,
                         style: kLableTextStyleLarge,
                       ),
                       SizedBox(
                         height: 20.0,
                       ),
                       Text(
-                        'BMI',
+                        this.interpretation,
                         style: kLableTextStyle,
                       ),
                     ],
